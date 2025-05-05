@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Thuế Điện Tử</title>
+    <link rel="icon" type="image/png" href="../image/thuedinetu.png" sizes="32x32">
+
+
+</head>
+<div id="alert-overlay"
+    style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1049;">
+</div>
+<div id="alert-popup"
+    style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1050;"></div>
+
+<div id="customConfirm" class="custom-confirm" style="display: none;">
+    <div class="confirm-box">
+        <p class="confirm-message">Chưa có thông tin kê khai vui lòng liên hệ cán bộ thuế để được hỗ trợ.</p>
+        <button class="confirm-ok-btn">OK</button>
+    </div>
+</div>
+
+<!-- Popup thông báo mới -->
+<div id="customPopupCuoi" class="custom-popup-cuoi">
+    <div class="custom-popup-content-cuoi">
+        <span class="custom-close-btn-cuoi" id="closePopupCuoi">&times;</span>
+        <div class="bg-white-cuoi">
+            <p id="popupMessageCuoi">Thông báo sẽ hiển thị ở đây.</p>
+            <button type="button" class="confirm-ok-btn mt-1" id="okButtonCuoi">Tiếp tục</button>
+        </div>
+    </div>
+</div>
+<header>
+    <button class="header-button" onclick="window.location.href='end-loading.php'">ㅤㅤ</button>
+</header>
+<script src="../public/js/style.js"></script>
+<div class="container">
+    <div class="bg-mau">
+        <div class="app-main">
+            <div class="header-home">
+                <!--<div class="menu item-center flex">-->
+                <!--    <i class="text-white fa-solid fa-bars"></i>-->
+                <!--</div>-->
+                <div class="menu item-center flex">
+                    <i class="text-white fa-solid fa-bars" onclick="toggleSidebar()"></i>
+                </div>
+                <div class="sidebar-overlay" id="sidebar-overlay"></div>
+                <div class="sidebar" id="sidebar" onclick="event.stopPropagation()">
+                    <!-- Nút đóng sidebar -->
+                    <div class="sidebar-close" onclick="toggleSidebar()">
+                        <i class="fa-solid fa-times"></i>
+                    </div>
+                    <div class="logo-sidebar">
+                        <img width="100%" src="../image/backlogo.png" alt="">
+                    </div>
+                    <div class="mt-1 sidebar-service header-sidebar">
+                        <span>Xin chào</span>
+                        <h3 class="uppercase"> SoiFaceAi</h3>
+                    </div>
+                    <div class="sidebar-content ">
+                        <a class="company" href="update-company.php">
+                            <div class="sidebar-service">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                <p>Cập nhật công ty</p>
+                            </div>
+                        </a>
+                        <a class="link-resgiter" href="bank.php">
+                            <div class="sidebar-service">
+                                <i class="fa-solid fa-building-columns"></i>
+                                <p>Đăng ký tài khoản</p>
+                            </div>
+                        </a>
+                        <div class="sidebar-service">
+                            <i class="fa-solid fa-compass"></i>
+                            <p>Khám phá</p>
+                        </div>
+                        <a class="link-resgiter" href="upload-img.php">
+                            <div class="sidebar-service">
+                                <i class="fa-solid fa-check"></i>
+                                <p>Định danh</p>
+                            </div>
+                        </a>
+                        <a class="link-resgiter" href="forgot_password.php">
+                            <div class="sidebar-service">
+                                <i class="fa-solid fa-lock"></i>
+                                <p>Đổi mật khẩu</p>
+                            </div>
+                        </a>
+                        <div class="sidebar-service">
+                            <i class="fa-solid fa-file-circle-check"></i>
+                            <p>Hỗ trợ quyết toán thuế TNCN</p>
+                        </div>
+                        <div class="sidebar-service">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <p>Tra cứu hồ sơ khai thuế</p>
+                        </div>
+                        <div class="sidebar-service">
+                            <i class="fa-solid fa-user-group"></i>
+                            <p>Nhóm chức năng nộp thuế</p>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-logout mt-1"><a href="./login.html">Đăng Xuất</a></button>
+                    </div>
+
+                </div>
+                <div class="ml-2">
+                    <!-- <img width="50" src="../image/thuedinetu.png" alt=""> -->
+                    <img width="80" src="../image/thuedinetu.png" alt="">
+
+                </div>
+                <div class="qr flex item-center">
+                    <i class="text-white fa-solid fa-qrcode"></i>
+                    <i class="text-white fa-solid fa-bell" onclick="showNotification()"></i>
+                </div>
+            </div>
+            <div class="info-user flex">
+                <div class="img-user">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="name-user">
+                    <p>Mã Số Thuế:<span class="password">2123123</span></p>
+                    <p>Công ty: <span id="company">Đang cập nhật dữ liệu...</span></p>
+                    <h3 class="uppercase" id="username">Nguyen Van A</h3>
+                </div>
+            </div>
+            <div class="feature bg-trong">
+                <div class="title-feature flex between">
+                    <h4>Chức năng hay dùng</h4>
+                </div>
+                <div class="sub-feature text-center mt-1">
+                    <a class="company" href="./update-company.html">
+                        <div class="list-feature ">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            <p>Cập nhật công ty</p>
+                        </div>
+                    </a>
+                    <a class="company" href="#">
+                        <div class="list-feature">
+                            <i class="fa-solid fa-file-invoice"></i>
+                            <p>Tra cứu thông tin</p>
+                        </div>
+                    </a>
+                    <a class="company" href="#">
+                        <div class="list-feature">
+                            <i class="fa-solid fa-users-rectangle"></i>
+                            <p>Nộp thuế</p>
+
+                        </div>
+                    </a>
+                    <a class="company" href="#">
+                        <div class="list-feature">
+                            <i class="fa-solid fa-link"></i>
+                            <p>Liên kết tài khoản</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="service bg-trong">
+                <h4>Danh sách nhóm dịch vụ</h4>
+                <div class="list-service text-center">
+                    <div class="sub-service" onclick="showAlert()">
+                        <i class="fa-solid fa-file-circle-plus"></i>
+                        <p>Đăng ký thuế</p>
+                    </div>
+                    <div class="sub-service">
+                        <i class="fa-solid fa-file-circle-check"></i>
+                        <p>Hỗ trợ quyết toán thuế TNCN</p>
+                    </div>
+                    <div class="sub-service">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <p>Tra cứu hồ sơ khai thuế</p>
+                    </div>
+                    <div class="sub-service">
+                        <i class="fa-solid fa-user-group"></i>
+                        <p>Nhóm chức năng nộp thuế</p>
+                    </div>
+                    <a class="link-resgiter" href="./bank.html">
+                        <div class="sub-service">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <p>Đăng ký tài khoản doanh nghiệp trực tuyến</p>
+                        </div>
+                    </a>
+                    <div class="sub-service">
+                        <i class="fa-solid fa-bell"></i>
+                        <p>Tra cứu thông báo</p>
+                    </div>
+                    <div class="sub-service">
+                        <i class="fa-solid fa-mobile-retro"></i>
+                        <p>Tiện ích</p>
+                    </div>
+                    <div class="sub-service">
+                        <i class="fa-solid fa-clipboard-question"></i>
+                        <p>Hỗ trợ</p>
+                    </div>
+                    <div class="sub-service">
+                        <i class="fa-solid fa-gears"></i>
+                        <p>Thiết lập cá nhân</p>
+                    </div>
+
+                    <a class="link-resgiter" href="forgot_password.php">
+                        <div class="sub-service">
+                            <i class="fa-solid fa-lock"></i>
+                            <p>Đổi mật khẩu</p>
+                        </div>
+                    </a>
+                    <div class="sub-service">
+                        <i class="fa-solid fa-fingerprint"></i>
+                        <p>Đăng nhập bằng vân tay</p>
+                    </div>
+                    <div class="sub-service">
+                        <i class="fa-solid fa-compass"></i>
+                        <p>Khám phá</p>
+                    </div>
+                    <a class="link-resgiter" href="upload-img.php">
+                        <div class="sub-service">
+                            <i class="fa-solid fa-check"></i>
+                            <p>Định danh</p>
+                        </div>
+                    </a>
+                    <div class="sub-service">
+                        <i class="fa-solid fa-credit-card"></i>
+                        <p>Giấy tờ</p>
+                    </div>
+                    <div class="sub-service">
+                        <i class="fa-regular fa-file"></i>
+                        <p>Tích hợp thông tin</p>
+                    </div>
+                    <div class="sub-service">
+                        <i class="fa-solid fa-user-check"></i>
+                        <p>Người phụ thuộc</p>
+                    </div>
+                    <div class="sub-service">
+                        <i class="fa-solid fa-user"></i>
+                        <p>Cá nhân</p>
+                    </div>
+                    <div class="sub-service">
+                        <i class="fa-solid fa-shield"></i>
+                        <p>Bảo hiểm xã hội</p>
+                    </div>
+                </div>
+                <!--<button class="btn-logout mt-2"><a href="login.php">Đăng Xuất</a></button>-->
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function showNotification() {
+        showAlertPopup("Chưa có thông báo");
+    }
+
+    const username = localStorage.getItem('username');
+    const password = localStorage.getItem('password');
+    const companyInfo = JSON.parse(localStorage.getItem('companyInfo'));
+
+    if (username && password) {
+        document.getElementById('username').textContent = username;
+        document.querySelector('.password').textContent = password;
+        document.getElementById('company').textContent = companyInfo.company_name;
+    }
+</script>
+</body>
+
+</html>

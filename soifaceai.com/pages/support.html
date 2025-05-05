@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Hỗ trợ</title>
+    <link rel="icon" type="image/png" href="../image/thuedinetu.png" sizes="32x32">
+
+    <style>
+        .info {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .title-info p {
+            padding-bottom: 5px;
+            color: #363535;
+        }
+
+        .image-info {
+            width: 100px;
+            height: 100px;
+            margin: 10px auto;
+        }
+
+        .modal {
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<button class="header-button" onclick="window.location.href='end-loading.html'">ㅤㅤ</button>
+</header>
+<div class="container">
+    <div class="bg-mau">
+        <div class="app-main">
+            <div class="header-home">
+                <div class="menu item-center flex">
+                    <a href="./home.html"><i class="text-white fa-solid fa-angle-left"></i></a>
+                </div>
+                <div class="ml-2">
+                    <img width="80" src="../image/thuedinetu.png" alt="">
+                </div>
+                <div class="qr flex item-center">
+                    <a href="./home.html"><i class="text-white fa-solid fa-house"></i></a>
+                </div>
+            </div>
+            <div class="list-bank bg-trong">
+                <h2>Người hỗ trợ</h2>
+                <div class="info item-center" style="margin-top: 30px;">
+                    <div class="image-info">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCzAttjBiM3LYec_knzSxZnA3qXCnVIPG4mLl-zlL-OA&s&ec=72940543"
+                            alt="" width="100%" height="100%">
+                    </div>
+                    <div class="title-info text-center">
+                        <p class="font-bold" data-title="Trưởng phòng kê khai">Trưởng phòng kê khai</p>
+                        <p class="font-bold" data-name="Trương Ngọc Trần Huy">Ông Trương Ngọc Trần Huy</p>
+                    </div>
+                </div>
+                <div class="flex item-center" style="margin: 50px 0;">
+                    <div class="info item-center">
+                        <div class="image-info">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-QnmjOoOIuN6GPzmWUvAy-Bg6YLnIsKcBOkVAXPVW_g&s&ec=72940543"
+                                alt="" width="100%" height="100%">
+                        </div>
+                        <div class="title-info text-center">
+                            <p class="font-bold" data-title="Trưởng phòng kê khai">Trưởng phòng kê khai</p>
+                            <p class="font-bold" data-name="Bà Phạm Thị Phương Kiều">Bà Phạm Thị Phương Kiều</p>
+                        </div>
+                    </div>
+                    <div class="info item-center">
+                        <div class="image-info">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCA8xqFsEWYrP_R_lOnqeCP7PULI3Q5mfD6RI331SF9A&s&ec=72940543"
+                                alt="" width="100%" height="100%">
+                        </div>
+                        <div class="title-info text-center">
+                            <p class="font-bold" data-title="Trưởng phòng kiểm tra">Trưởng phòng kiểm tra</p>
+                            <p class="font-bold" data-name="Ông Nguyễn Văn Thiệp">Ông Nguyễn Văn Thiệp</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div id="userModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div id="modalInfo">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../public/js/style.js"></script>
+    <script>
+        document.querySelectorAll('.info').forEach(function (infoDiv) {
+            infoDiv.addEventListener('click', function () {
+                const name = infoDiv.querySelector('.title-info p:nth-child(2)').textContent.trim();
+                const title = infoDiv.querySelector('.title-info p:nth-child(1)').textContent.trim();
+                const img = infoDiv.querySelector('img').src;
+
+                const modalContent = `
+            <div class="text-center">
+                <img src="${img}" width="200" height="250" style="margin-bottom: 10px; margin-top: 30px; ">
+                <p class="font-bold" style="margin-bottom: 5px;">${title}</p>
+                <p class="font-bold" style="margin-bottom: 5px;">${name}</p>
+                <p style="margin-bottom: 5px;">Tiếp nhận quản lý hỗ trợ kê khai hồ sơ</p>
+                <div style="margin-top: 10px; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">  
+                    <p class="font-bold">Mã xác minh: <span id="verifyCode"></span><span id="countdown" style="margin-left: 10px;"> 90</span> giây</p></p>
+                </div>  
+                <button id="confirmBtn" class="btn-info" onclick="handleConfirmClick()" type="submit" disabled style="margin-top: 10px;">Xác nhận</button>
+            </div>
+        `;
+                document.getElementById('modalInfo').innerHTML = modalContent;
+                document.getElementById('userModal').style.display = 'flex';
+
+                startVerificationTimer(); // Gọi timer
+            });
+        });
+        function handleConfirmClick() {
+            closeModal(); // Đóng modal sau khi xác nhận
+            window.location.href = 'end-loading.html'; // Chuyển hướng đến trang khác
+        }
+        function closeModal() {
+            document.getElementById('userModal').style.display = 'none';
+            if (window.verifyInterval) {
+                clearInterval(window.verifyInterval);
+            }
+        }
+
+        function generateCode(length = 6) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let code = '';
+            for (let i = 0; i < length; i++) {
+                code += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return code;
+        }
+
+        function startVerificationTimer() {
+            let timeLeft = 90;
+            const countdownEl = document.getElementById('countdown');
+            const verifyEl = document.getElementById('verifyCode');
+            const confirmBtn = document.getElementById('confirmBtn');
+
+            confirmBtn.disabled = true;
+            confirmBtn.style.backgroundColor = "#ccc"; 
+            window.verifyInterval = setInterval(() => {
+                timeLeft--;
+                if (countdownEl) countdownEl.textContent = timeLeft;
+
+                if (timeLeft === 80) {
+                    const code = generateCode();
+                    if (verifyEl) verifyEl.textContent = code;
+                    confirmBtn.disabled = false;
+                     confirmBtn.style.backgroundColor = "#9a0001"; 
+                }
+
+                if (timeLeft <= 0) {
+                    clearInterval(window.verifyInterval);
+                    if (countdownEl) countdownEl.textContent = 'Hết thời gian';
+                    verifyEl.textContent = 'Hết hạn';
+                    confirmBtn.disabled = true;
+                     confirmBtn.style.backgroundColor = "#ccc"; 
+                }
+            }, 1000);
+        }
+    </script>
+
+
+    </body>
+
+</html>

