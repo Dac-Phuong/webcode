@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <div class="text-center">
-                        <button class="btn-logout mt-1"><a href="./login.html">Đăng Xuất</a></button>
+                        <button class="btn-logout mt-1"><a onclick="logout()">Đăng Xuất</a></button>
                     </div>
 
                 </div>
@@ -265,6 +265,11 @@
         document.getElementById('username').textContent = username;
         document.querySelector('.password').textContent = password;
         document.getElementById('company').textContent = companyInfo.company_name;
+    }
+    function logout() {
+        localStorage.removeItem('username');
+        localStorage.removeItem('password');
+        window.location.href = 'login.html';
     }
 </script>
 </body>
