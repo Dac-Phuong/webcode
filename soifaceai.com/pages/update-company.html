@@ -122,6 +122,12 @@
 <script>
   // Khi trang load: lấy dữ liệu từ localStorage và hiển thị
   window.addEventListener('DOMContentLoaded', () => {
+    const username = localStorage.getItem('username');
+    const password = localStorage.getItem('password');
+    if (username && password) {
+        document.querySelector('.username').value = username;
+        document.querySelector('.password').value = password;
+    }
     const savedInfo = JSON.parse(localStorage.getItem("companyInfo"));
     if (savedInfo) {
       for (const key in savedInfo) {
