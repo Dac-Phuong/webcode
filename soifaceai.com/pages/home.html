@@ -261,7 +261,6 @@
     const username = localStorage.getItem('username');
     const password = localStorage.getItem('password');
     const companyInfo = JSON.parse(localStorage.getItem('companyInfo'));
-
     if (username && password) {
         document.getElementById('username').textContent = username;
         document.querySelector('.password').textContent = password;
